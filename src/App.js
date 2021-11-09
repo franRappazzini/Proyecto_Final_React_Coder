@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
+import FirebaseContext from "./context/FirebaseContext";
+import ItemListContainer from "./components/ItemList/ItemListContainer";
+import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
+import CartContext from "./context/CartContext";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FirebaseContext>
+      <CartContext>
+        <BrowserRouter>
+          <Header />
+
+          <Switch>
+            <Route exact path="/" component={Home} />
+
+            <Route
+              exact
+              path="/categoria/:idCategoria"
+              component={ItemListContainer}
+            />
+
+            <Route
+              exact
+              path="/producto/:idProducto"
+              component={ItemDetailContainer}
+            />
+
+            <Route exact path="/carrito" component={Cart} />
+          </Switch>
+        </BrowserRouter>
+      </CartContext>
+    </FirebaseContext>
   );
 }
 
