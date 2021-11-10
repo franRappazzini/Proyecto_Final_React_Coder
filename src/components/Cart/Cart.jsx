@@ -38,8 +38,10 @@ function Cart() {
       )}
 
       {carrito.length > 0 && (
-        <section>
-          <button className="btn btn-success me-2">Comprar</button>
+        <section className="mb-3">
+          <Link to="/checkout" className="btn btn-success me-2">
+            Comprar
+          </Link>
           <button
             onClick={vaciarCarrito}
             className="btn btn-outline-danger ms-2"

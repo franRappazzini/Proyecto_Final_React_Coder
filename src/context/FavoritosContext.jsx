@@ -4,7 +4,14 @@ const favoritosContext = createContext();
 export const useFavoritosContext = () => useContext(favoritosContext);
 
 function FavoritosContext({ children }) {
-  const [favoritos, setFavoritos] = useState([]);
+  let favLocalStorage = JSON.parse(localStorage.getItem("favoritosReact"));
+
+  const [favoritos, setFavoritos] = useState(
+    favLocalStorage ? favLocalStorage : []
+  );
+
+  // guarda en localStorage
+  localStorage.setItem("favoritosReact", JSON.stringify(favoritos));
 
   // agrega el producto a favoritos
   function addToFavoritos(producto) {

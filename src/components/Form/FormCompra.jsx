@@ -2,25 +2,40 @@ import Button from "@restart/ui/esm/Button";
 import React, { useState } from "react";
 import { FloatingLabel, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
+import firebase from "firebase";
+import { useCartContext } from "../../context/CartContext";
+import { getFirebase } from "../../services/getFirebase";
+import { useHistory } from "react-router";
 
 function FormCompra() {
   const [nombre, setNombre] = useState();
   const [apellido, setApellido] = useState();
   const [email, setEmail] = useState();
   const [email2, setEmail2] = useState();
+  const { carrito, setCarrito } = useCartContext();
+  const history = useHistory();
 
   console.log(nombre, apellido, email, email2);
 
+  // escucha el envio del form
   function handleSubmit(e) {
     e.preventDefault();
 
-    emailCheck();
+    if (carrito.length > 0) {
+      emailCheck();
+    } else {
+      Swal.fire(
+        "Error",
+        "No hay productos en el carrito. Sera redirigido al home.",
+        "error"
+      ).finally(() => history.push("/"));
+    }
   }
 
   // validar que los emails sean iguales
   function emailCheck() {
     if (email === email2) {
-      alert("si");
+      sendToFirebase();
     } else {
       Swal.fire(
         "Error",
@@ -28,6 +43,30 @@ function FormCompra() {
         "error"
       );
     }
+  }
+
+  // envia la compra a firebase
+  function sendToFirebase() {
+    let orden = {};
+    orden.comprador = { nombre, apellido, email };
+    orden.carrito = carrito;
+    orden.fecha = firebase.firestore.Timestamp.fromDate(new Date());
+
+    const db = getFirebase();
+
+    db.collection("compras")
+      .add(orden)
+      .then((res) =>
+        Swal.fire(
+          `Felicidades ${nombre} ${apellido}!`,
+          `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. El numero de seguimiento es ${res.id}`,
+          "success"
+        )
+      )
+      .catch((err) => console.log(`Error: ${err}`))
+      .finally(() => {
+        history.push("/");
+      });
   }
 
   return (

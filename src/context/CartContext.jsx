@@ -5,7 +5,14 @@ const cartContext = createContext();
 export const useCartContext = () => useContext(cartContext);
 
 function CartContext({ children }) {
-  const [carrito, setCarrito] = useState([]);
+  let cartLocalStorage = JSON.parse(localStorage.getItem("carritoReact"));
+
+  const [carrito, setCarrito] = useState(
+    cartLocalStorage ? cartLocalStorage : []
+  );
+
+  // guarda el carrito en el localStorage
+  localStorage.setItem("carritoReact", JSON.stringify(carrito));
 
   /**
    * FUNCTIONS
@@ -14,9 +21,13 @@ function CartContext({ children }) {
   // agrega un producto al carrito
   function addToCart(producto, cantidad) {
     if (carrito.some((p) => p.id === producto.id)) {
-      let repetido = carrito.find((p) => p.id === producto.id);
+      let newCart = [...carrito];
+
+      let repetido = newCart.find((p) => p.id === producto.id);
 
       repetido.cant += cantidad;
+
+      setCarrito(newCart);
     } else {
       setCarrito([...carrito, producto]);
     }
@@ -40,7 +51,8 @@ function CartContext({ children }) {
     return total;
   }
 
-  function vaciarCarrito() { 
+  // vacia el carrito
+  function vaciarCarrito() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-outline-success ms-2",
@@ -71,6 +83,13 @@ function CartContext({ children }) {
       });
   }
 
+  // borra un producto del carrito
+  function borrarProducto(id) {
+    let newCart = carrito.filter((p) => p.id !== id);
+
+    setCarrito(newCart);
+  }
+
   return (
     <cartContext.Provider
       value={{
@@ -80,6 +99,7 @@ function CartContext({ children }) {
         productosEnCarrito,
         precioTotal,
         vaciarCarrito,
+        borrarProducto,
       }}
     >
       {children}

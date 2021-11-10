@@ -11,7 +11,9 @@ function Counter({ cant, subtractCant, addCant, stockItem }) {
       >
         -
       </Button>
+
       <p className="my-0 mx-2">{cant}</p>
+
       <Button
         disabled={cant === stockItem}
         onClick={addCant}

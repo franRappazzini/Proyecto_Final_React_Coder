@@ -2,7 +2,7 @@ import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 import "./Header.css";
 
@@ -23,9 +23,15 @@ function Header() {
         />
 
         <div className="d-flex">
-          <Link to="/favoritos" className="me-3" title="Favoritos">
-            <FontAwesomeIcon icon={faHeart} color="black" />
-          </Link>
+          <NavLink
+            activeStyle={{ color: "#dc3545" }}
+            style={{ color: "black" }}
+            to="/favoritos"
+            className="me-3"
+            title="Favoritos"
+          >
+            <FontAwesomeIcon icon={faHeart} />
+          </NavLink>
 
           <Link
             to="/carrito"
@@ -43,16 +49,33 @@ function Header() {
       <section className="container">
         <ul className="d-flex justify-content-center">
           <li>
-            <Link to="/categoria/Electronica">Electrónica</Link>
+            <NavLink
+              activeStyle={{ fontWeight: "700" }}
+              to="/categoria/Electronica"
+            >
+              Electrónica
+            </NavLink>
           </li>
           <li>
-            <Link to="/categoria/Vehiculos">Vehículos</Link>
+            <NavLink
+              activeStyle={{ fontWeight: "700" }}
+              to="/categoria/Vehiculos"
+            >
+              Vehículos
+            </NavLink>
           </li>
           <li>
-            <Link to="/categoria/Belleza">Belleza</Link>
+            <NavLink
+              activeStyle={{ fontWeight: "700" }}
+              to="/categoria/Belleza"
+            >
+              Belleza
+            </NavLink>
           </li>
           <li>
-            <Link to="/categoria/Moda">Moda</Link>
+            <NavLink activeStyle={{ fontWeight: "700" }} to="/categoria/Moda">
+              Moda
+            </NavLink>
           </li>
         </ul>
       </section>

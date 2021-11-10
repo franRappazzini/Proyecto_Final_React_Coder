@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFavoritosContext } from "../../context/FavoritosContext";
 import BtnsFavoritos from "../StateLess/BtnsFavoritos";
+import "./ItemList.css";
 
 function ItemList({ id, producto, precio, img }) {
   const { addToFavoritos, removeFromFavoritos } = useFavoritosContext();
@@ -13,7 +14,7 @@ function ItemList({ id, producto, precio, img }) {
   }
 
   return (
-    <Card style={{ width: "15rem" }} className="my-3">
+    <Card style={{ width: "15rem" }} className="my-3 item__cart">
       <Card.Img
         variant="top"
         src={img}
