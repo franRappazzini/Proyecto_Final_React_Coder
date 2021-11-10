@@ -1,11 +1,17 @@
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "@restart/ui/esm/Button";
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useFavoritosContext } from "../../context/FavoritosContext";
+import BtnsFavoritos from "../StateLess/BtnsFavoritos";
 
 function ItemList({ id, producto, precio, img }) {
+  const { addToFavoritos, removeFromFavoritos } = useFavoritosContext();
+
+  // pushea el producto a favoritos
+  function pushToFavoritos() {
+    addToFavoritos({ id, producto, precio, img });
+  }
+
   return (
     <Card style={{ width: "15rem" }} className="my-3">
       <Card.Img
@@ -24,9 +30,11 @@ function ItemList({ id, producto, precio, img }) {
             Ver más
           </Link>
 
-          <Button className="btn btn-outline-danger ms-2">
-            <FontAwesomeIcon icon={faHeart} />
-          </Button>
+          <BtnsFavoritos
+            id={id}
+            pushToFavoritos={pushToFavoritos}
+            removeFromFavoritos={() => removeFromFavoritos(id)}
+          />
         </div>
       </Card.Body>
     </Card>

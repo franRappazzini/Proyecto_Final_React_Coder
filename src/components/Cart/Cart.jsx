@@ -4,7 +4,7 @@ import { useCartContext } from "../../context/CartContext";
 import ItemCart from "./ItemCart";
 
 function Cart() {
-  const { carrito, setCarrito, precioTotal } = useCartContext();
+  const { carrito, precioTotal, vaciarCarrito } = useCartContext();
 
   return (
     <section className="container">
@@ -40,7 +40,10 @@ function Cart() {
       {carrito.length > 0 && (
         <section>
           <button className="btn btn-success me-2">Comprar</button>
-          <button className="btn btn-outline-danger ms-2">
+          <button
+            onClick={vaciarCarrito}
+            className="btn btn-outline-danger ms-2"
+          >
             Vaciar carrito
           </button>
         </section>

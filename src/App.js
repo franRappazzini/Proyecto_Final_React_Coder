@@ -8,32 +8,41 @@ import ItemListContainer from "./components/ItemList/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import CartContext from "./context/CartContext";
 import Cart from "./components/Cart/Cart";
+import FormCompra from "./components/Form/FormCompra";
+import Favoritos from "./components/Favoritos/Favoritos";
+import FavoritosContext from "./context/FavoritosContext";
 
 function App() {
   return (
     <FirebaseContext>
       <CartContext>
-        <BrowserRouter>
-          <Header />
+        <FavoritosContext>
+          <BrowserRouter>
+            <Header />
 
-          <Switch>
-            <Route exact path="/" component={Home} />
+            <Switch>
+              <Route exact path="/" component={Home} />
 
-            <Route
-              exact
-              path="/categoria/:idCategoria"
-              component={ItemListContainer}
-            />
+              <Route
+                exact
+                path="/categoria/:idCategoria"
+                component={ItemListContainer}
+              />
 
-            <Route
-              exact
-              path="/producto/:idProducto"
-              component={ItemDetailContainer}
-            />
+              <Route
+                exact
+                path="/producto/:idProducto"
+                component={ItemDetailContainer}
+              />
 
-            <Route exact path="/carrito" component={Cart} />
-          </Switch>
-        </BrowserRouter>
+              <Route exact path="/carrito" component={Cart} />
+
+              <Route exact path="/favoritos" component={Favoritos} />
+
+              <Route exact path="/checkout" component={FormCompra} />
+            </Switch>
+          </BrowserRouter>
+        </FavoritosContext>
       </CartContext>
     </FirebaseContext>
   );

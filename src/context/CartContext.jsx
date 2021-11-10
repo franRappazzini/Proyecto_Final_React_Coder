@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import Swal from "sweetalert2";
 
 const cartContext = createContext();
 export const useCartContext = () => useContext(cartContext);
@@ -31,11 +32,43 @@ function CartContext({ children }) {
     return total;
   }
 
+  // suma el precio total de productos en el carrito
   function precioTotal() {
     let total = 0;
     carrito.forEach((p) => (total += p.precio * p.cant));
 
     return total;
+  }
+
+  function vaciarCarrito() { 
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-outline-success ms-2",
+        cancelButton: "btn btn-outline-danger me-2",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Seguro desea vaciar todo el carrito?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, vaciar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Carrito vaciado exitosamente!",
+            "",
+            "success"
+          );
+          setCarrito([]);
+        }
+      });
   }
 
   return (
@@ -46,6 +79,7 @@ function CartContext({ children }) {
         addToCart,
         productosEnCarrito,
         precioTotal,
+        vaciarCarrito,
       }}
     >
       {children}
