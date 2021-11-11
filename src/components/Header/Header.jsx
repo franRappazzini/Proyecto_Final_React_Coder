@@ -11,7 +11,7 @@ function Header() {
 
   return (
     <header>
-      <section className="container d-flex justify-content-between align-items-center">
+      <section className="container d-flex justify-content-between align-items-center pt-3">
         <Link to="/">
           <h1 className="m-0">MELI</h1>
         </Link>
@@ -19,7 +19,7 @@ function Header() {
         <Form.Control
           type="search"
           placeholder="Buscar"
-          style={{ width: "20rem" }}
+          className="input__busqueda"
         />
 
         <div className="d-flex">
@@ -27,7 +27,7 @@ function Header() {
             activeStyle={{ color: "#dc3545" }}
             style={{ color: "black" }}
             to="/favoritos"
-            className="me-3"
+            className="me-2"
             title="Favoritos"
           >
             <FontAwesomeIcon icon={faHeart} />
@@ -35,7 +35,7 @@ function Header() {
 
           <Link
             to="/carrito"
-            className="ms-3 position-relative"
+            className="ms-2 position-relative"
             title="Carrito"
           >
             <FontAwesomeIcon icon={faShoppingCart} color="black" />
@@ -46,7 +46,7 @@ function Header() {
         </div>
       </section>
 
-      <section className="container">
+      <section className="container py-2">
         <ul className="d-flex justify-content-center">
           <li>
             <NavLink

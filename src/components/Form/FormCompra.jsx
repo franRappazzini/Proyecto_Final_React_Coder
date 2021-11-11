@@ -45,6 +45,14 @@ function FormCompra() {
     }
   }
 
+  // vacia los datos del form
+  function vaciarForm() {
+    setNombre("");
+    setApellido("");
+    setEmail("");
+    setEmail2("");
+  }
+
   // envia la compra a firebase
   function sendToFirebase() {
     let orden = {};
@@ -66,6 +74,7 @@ function FormCompra() {
       .catch((err) => console.log(`Error: ${err}`))
       .finally(() => {
         history.push("/");
+        setCarrito([]);
       });
   }
 
@@ -138,7 +147,7 @@ function FormCompra() {
         <Button className="btn btn-success me-2" type="submit">
           Enviar
         </Button>
-        <Button className="btn btn-outline-danger ms-2" type="reset">
+        <Button onClick={vaciarForm} className="btn btn-outline-danger ms-2">
           Reiniciar
         </Button>
       </Form>

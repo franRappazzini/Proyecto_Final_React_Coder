@@ -18,7 +18,7 @@ function Favoritos() {
             {favoritos.map((p) => (
               <Col
                 key={p.id}
-                xs={12}
+                xs={6}
                 md={3}
                 className="d-flex justify-content-center"
               >
