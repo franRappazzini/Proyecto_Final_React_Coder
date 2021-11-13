@@ -59,7 +59,7 @@ function ItemListContainer() {
       )}
 
       {filtroBusqueda && filtroBusqueda.length === 0 && (
-        <h3 className="text-center">
+        <h3 className="text-center mt-3">
           Lo siento, su busqueda no arrojo resultados.
         </h3>
       )}

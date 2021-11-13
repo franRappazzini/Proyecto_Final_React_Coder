@@ -62,7 +62,7 @@ function FormCompra() {
       .then((res) => {
         Swal.fire(
           `Felicidades ${nombre} ${apellido}!`,
-          `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. El numero de seguimiento es ${res.id}`,
+          `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. A continuación se le descargara la factura de la compra.`,
           "success"
         );
         //

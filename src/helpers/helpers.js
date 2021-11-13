@@ -58,7 +58,7 @@ export function createPDF(orden, id) {
       (p) =>
         `*Producto: ${
           p.producto
-        } / Precio (unidad): ${new Intl.NumberFormat().format(
+        } / Precio (unidad): $${new Intl.NumberFormat().format(
           p.precio
         )} / Cantidad: ${p.cant}\n`
     )}`,
