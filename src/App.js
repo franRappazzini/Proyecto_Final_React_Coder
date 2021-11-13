@@ -11,6 +11,7 @@ import Cart from "./components/Cart/Cart";
 import FormCompra from "./components/Form/FormCompra";
 import Favoritos from "./components/Favoritos/Favoritos";
 import FavoritosContext from "./context/FavoritosContext";
+import Error404 from "./components/Error/Error404";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
               <Route exact path="/favoritos" component={Favoritos} />
 
               <Route exact path="/checkout" component={FormCompra} />
+
+              <Route exact path="*" component={Error404} />
             </Switch>
           </BrowserRouter>
         </FavoritosContext>

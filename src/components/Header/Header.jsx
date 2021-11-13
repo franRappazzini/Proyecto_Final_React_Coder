@@ -37,16 +37,17 @@ function Header() {
             <FontAwesomeIcon icon={faHeart} />
           </NavLink>
 
-          <Link
+          <NavLink
+            activeStyle={{ color: "rgb(70, 70, 70)" }}
             to="/carrito"
             className="ms-2 position-relative"
             title="Carrito"
           >
-            <FontAwesomeIcon icon={faShoppingCart} color="black" />
+            <FontAwesomeIcon icon={faShoppingCart} />
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               {productosEnCarrito()}
             </span>
-          </Link>
+          </NavLink>
         </div>
       </section>
 

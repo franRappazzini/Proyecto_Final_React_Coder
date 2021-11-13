@@ -6,13 +6,14 @@ import firebase from "firebase";
 import { useCartContext } from "../../context/CartContext";
 import { getFirebase } from "../../services/getFirebase";
 import { useHistory } from "react-router";
+import { checkoutLoader, createPDF } from "../../helpers/helpers";
 
 function FormCompra() {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
   const [email2, setEmail2] = useState("");
-  const { carrito, setCarrito } = useCartContext();
+  const { carrito, setCarrito, precioTotal } = useCartContext();
   const history = useHistory();
 
   console.log(nombre, apellido, email, email2);
@@ -36,6 +37,7 @@ function FormCompra() {
   function emailCheck() {
     if (email === email2) {
       sendToFirebase();
+      checkoutLoader();
     } else {
       Swal.fire(
         "Error",
@@ -45,37 +47,41 @@ function FormCompra() {
     }
   }
 
-  // vacia los datos del form
-  function vaciarForm() {
-    setNombre("");
-    setApellido("");
-    setEmail("");
-    setEmail2("");
-  }
-
   // envia la compra a firebase
   function sendToFirebase() {
     let orden = {};
     orden.comprador = { nombre, apellido, email };
     orden.carrito = carrito;
+    orden.total = precioTotal();
     orden.fecha = firebase.firestore.Timestamp.fromDate(new Date());
 
     const db = getFirebase();
 
     db.collection("compras")
       .add(orden)
-      .then((res) =>
+      .then((res) => {
         Swal.fire(
           `Felicidades ${nombre} ${apellido}!`,
           `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. El numero de seguimiento es ${res.id}`,
           "success"
-        )
-      )
+        );
+        //
+        createPDF(orden, res.id);
+        //
+      })
       .catch((err) => console.log(`Error: ${err}`))
       .finally(() => {
         history.push("/");
         setCarrito([]);
       });
+  }
+
+  // vacia los datos del form
+  function vaciarForm() {
+    setNombre("");
+    setApellido("");
+    setEmail("");
+    setEmail2("");
   }
 
   return (
