@@ -9,6 +9,7 @@ function FirebaseContext({ children }) {
   const [categoriaParam, setCategoriaParam] = useState(null);
   const [idParam, setIdParam] = useState(null);
   const [stockItem, setStockItem] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
     const db = getFirebase();
@@ -50,6 +51,8 @@ function FirebaseContext({ children }) {
         setIdParam,
         stockItem,
         setStockItem,
+        busqueda,
+        setBusqueda,
       }}
     >
       {children}

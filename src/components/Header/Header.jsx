@@ -4,10 +4,12 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
+import { useFirebaseContext } from "../../context/FirebaseContext";
 import "./Header.css";
 
 function Header() {
   const { productosEnCarrito } = useCartContext();
+  const { busqueda, setBusqueda } = useFirebaseContext();
 
   return (
     <header>
@@ -17,9 +19,11 @@ function Header() {
         </Link>
 
         <Form.Control
+          onChange={(e) => setBusqueda(e.target.value)}
           type="search"
           placeholder="Buscar"
           className="input__busqueda"
+          value={busqueda}
         />
 
         <div className="d-flex">

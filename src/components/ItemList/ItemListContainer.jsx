@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router";
 import { useFirebaseContext } from "../../context/FirebaseContext";
 import ItemList from "./ItemList";
 
 function ItemListContainer() {
-  const { productos, setCategoriaParam, setIdParam } = useFirebaseContext();
+  const { productos, setCategoriaParam, setIdParam, busqueda } =
+    useFirebaseContext();
   const { idCategoria } = useParams();
 
   //setea el id del state de firebase
-  setIdParam(null);
+  useEffect(() => {
+    setIdParam(null);
+  }, [setIdParam, idCategoria]);
 
-  idCategoria ? setCategoriaParam(idCategoria) : setCategoriaParam(null);
+  // si existe el parametro de categoria, filtra los productos de esa categoria
+  useEffect(() => {
+    idCategoria ? setCategoriaParam(idCategoria) : setCategoriaParam(null);
+  }, [idCategoria, setCategoriaParam]);
+
+  // para buscar por productos por nombre
+  let filtroBusqueda = busqueda
+    ? productos.filter((p) =>
+        p.producto.toLowerCase().includes(busqueda.toLowerCase())
+      )
+    : productos;
+
+  console.log(filtroBusqueda);
 
   return (
     <>
       {productos && productos.length > 0 ? (
         <section className="container">
           <Row>
-            {productos.map((p) => (
+            {filtroBusqueda.map((p) => (
               <Col
                 key={p.id}
                 xs={6}
@@ -40,6 +55,12 @@ function ItemListContainer() {
         <section className="d-flex justify-content-center mt-3">
           <Spinner animation="border" variant="warning" />
         </section>
+      )}
+
+      {filtroBusqueda && filtroBusqueda.length === 0 && (
+        <h3 className="text-center">
+          Lo siento, su busqueda no arrojo resultados.
+        </h3>
       )}
     </>
   );

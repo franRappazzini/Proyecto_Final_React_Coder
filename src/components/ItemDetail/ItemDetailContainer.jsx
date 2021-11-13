@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router";
 import { useFirebaseContext } from "../../context/FirebaseContext";
@@ -10,7 +10,9 @@ function ItemDetailContainer() {
 
   idProducto ? setIdParam(idProducto) : setIdParam(null);
 
-  setCategoriaParam(null);
+  useEffect(() => {
+    setCategoriaParam(null);
+  }, [setCategoriaParam, idProducto]);
 
   return (
     <>

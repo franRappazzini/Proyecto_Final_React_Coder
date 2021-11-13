@@ -8,10 +8,10 @@ import { getFirebase } from "../../services/getFirebase";
 import { useHistory } from "react-router";
 
 function FormCompra() {
-  const [nombre, setNombre] = useState();
-  const [apellido, setApellido] = useState();
-  const [email, setEmail] = useState();
-  const [email2, setEmail2] = useState();
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [email, setEmail] = useState("");
+  const [email2, setEmail2] = useState("");
   const { carrito, setCarrito } = useCartContext();
   const history = useHistory();
 

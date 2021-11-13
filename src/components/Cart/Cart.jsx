@@ -23,7 +23,7 @@ function Cart() {
         ))
       ) : (
         <section className="d-flex flex-column justify-content-center align-items-center mt-3">
-          <h2>Tu carrito está vacío</h2>
+          <h2>Su carrito está vacío</h2>
           <p>Agrega algo y lo verá aqui!</p>
           <Link to="/" className="btn btn-outline-primary">
             Volver al Home
