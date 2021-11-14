@@ -1,6 +1,6 @@
 import Button from "@restart/ui/esm/Button";
 import React, { useState } from "react";
-import { FloatingLabel, Form, Row } from "react-bootstrap";
+import { Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import firebase from "firebase";
 import { useCartContext } from "../../context/CartContext";
