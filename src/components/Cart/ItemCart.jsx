@@ -14,11 +14,13 @@ function ItemCart({ id, img, producto, descripcion, precio, cant }) {
           xs={5}
           className="d-flex justify-content-center align-items-center"
         >
-          <Card.Img
-            variant="top"
-            src={img}
-            style={{ height: "9rem", objectFit: "contain" }}
-          />
+          <Link to={`/producto/${id}`} title={producto}>
+            <Card.Img
+              variant="top"
+              src={img}
+              style={{ height: "9rem", objectFit: "contain" }}
+            />
+          </Link>
         </Col>
 
         <Col xs={7}>

@@ -15,13 +15,20 @@ function ItemList({ id, producto, precio, img }) {
 
   return (
     <Card style={{ width: "15rem" }} className="my-3 item__cart">
-      <Card.Img
-        variant="top"
-        src={img}
-        style={{ height: "9rem", objectFit: "contain" }}
-      />
+      <Link to={`/producto/${id}`} title={producto}>
+        <Card.Img
+          variant="top"
+          src={img}
+          style={{ height: "9rem", objectFit: "contain" }}
+        />
+      </Link>
       <Card.Body className="d-flex flex-column justify-content-between align-items-center">
-        <Card.Title className="text-center">{producto}</Card.Title>
+        <Link
+          to={`/producto/${id}`}
+          style={{ color: "#212529", textDecoration: "none" }}
+        >
+          <Card.Title className="text-center">{producto}</Card.Title>
+        </Link>
         <Card.Text className="text-center">
           ${new Intl.NumberFormat().format(precio)}
         </Card.Text>
