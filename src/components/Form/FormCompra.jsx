@@ -7,6 +7,7 @@ import { useCartContext } from "../../context/CartContext";
 import { getFirebase } from "../../services/getFirebase";
 import { useHistory } from "react-router";
 import { checkoutLoader, createPDF } from "../../helpers/helpers";
+import InputForm from "../StateLess/InputForm";
 
 function FormCompra() {
   const [nombre, setNombre] = useState("");
@@ -65,9 +66,7 @@ function FormCompra() {
           `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. A continuación se le descargara la factura de la compra.`,
           "success"
         );
-        //
         createPDF(orden, res.id);
-        //
       })
       .catch((err) => console.log(`Error: ${err}`))
       .finally(() => {
@@ -92,62 +91,30 @@ function FormCompra() {
 
       <Form onSubmit={handleSubmit}>
         <Row xs={1} md={2}>
-          <FloatingLabel
-            controlId="floatingNombre"
-            label="Nombre"
-            className="mb-3"
-          >
-            <Form.Control
-              onChange={(e) => setNombre(e.target.value)}
-              autoFocus
-              type="text"
-              placeholder="Nombre"
-              required
-              value={nombre}
-            />
-          </FloatingLabel>
-
-          <FloatingLabel
-            controlId="floatingApellido"
-            label="Apellido"
-            className="mb-3"
-          >
-            <Form.Control
-              onChange={(e) => setApellido(e.target.value)}
-              type="text"
-              placeholder="Apellido"
-              required
-              value={apellido}
-            />
-          </FloatingLabel>
-
-          <FloatingLabel
-            controlId="floatingEmail"
-            label="Email"
-            className="mb-3"
-          >
-            <Form.Control
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Email"
-              required
-              value={email}
-            />
-          </FloatingLabel>
-
-          <FloatingLabel
-            controlId="floatingEmail2"
-            label="Repetir Email"
-            className="mb-3"
-          >
-            <Form.Control
-              onChange={(e) => setEmail2(e.target.value)}
-              type="email"
-              placeholder="Repetir Email"
-              required
-              value={email2}
-            />
-          </FloatingLabel>
+          <InputForm
+            state={nombre}
+            setState={(e) => setNombre(e.target.value)}
+            type="text"
+            placeholder="Nombre"
+          />
+          <InputForm
+            state={apellido}
+            setState={(e) => setApellido(e.target.value)}
+            type="text"
+            placeholder="Apellido"
+          />
+          <InputForm
+            state={email}
+            setState={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+          />
+          <InputForm
+            state={email2}
+            setState={(e) => setEmail2(e.target.value)}
+            type="email"
+            placeholder="Repita Email"
+          />
         </Row>
 
         <Button className="btn btn-success me-2" type="submit">
