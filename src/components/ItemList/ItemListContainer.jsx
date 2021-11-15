@@ -22,8 +22,10 @@ function ItemListContainer() {
   // para buscar por productos por nombre
   let filtroBusqueda =
     productos && busqueda
-      ? productos.filter((p) =>
-          p.producto.toLowerCase().includes(busqueda.toLowerCase())
+      ? productos.filter(
+          (p) =>
+            p.producto.toLowerCase().includes(busqueda.toLowerCase()) ||
+            p.categoria.toLowerCase().includes(busqueda.toLowerCase())
         )
       : productos;
 

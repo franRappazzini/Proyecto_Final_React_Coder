@@ -21,7 +21,7 @@ function Header() {
         <Form.Control
           onChange={(e) => setBusqueda(e.target.value)}
           type="search"
-          placeholder="Buscar"
+          placeholder="Buscar por producto o categoria"
           className="input__busqueda"
           value={busqueda}
         />

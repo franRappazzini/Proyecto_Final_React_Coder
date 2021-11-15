@@ -12,6 +12,7 @@ import FormCompra from "./components/Form/FormCompra";
 import Favoritos from "./components/Favoritos/Favoritos";
 import FavoritosContext from "./context/FavoritosContext";
 import Error404 from "./components/Error/Error404";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
 
               <Route exact path="*" component={Error404} />
             </Switch>
+
+            <Footer />
           </BrowserRouter>
         </FavoritosContext>
       </CartContext>
