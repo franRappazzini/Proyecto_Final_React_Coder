@@ -11,6 +11,8 @@ E-commerce construido con React JS para el Proyecto Final de Coderhouse.
 * [React Router DOM](https://v5.reactrouter.com/web/guides/quick-start)
 * [Sweet Alert 2](https://sweetalert2.github.io/)
 
+[Toque para ver proyecto](https://proyecto-final-react-coder.vercel.app/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
