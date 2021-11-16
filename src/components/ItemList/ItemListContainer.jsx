@@ -29,8 +29,6 @@ function ItemListContainer() {
         )
       : productos;
 
-  console.log(filtroBusqueda);
-
   return (
     <>
       {productos && productos.length > 0 ? (

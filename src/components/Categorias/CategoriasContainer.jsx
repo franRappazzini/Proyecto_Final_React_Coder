@@ -11,8 +11,6 @@ function CategoriasContainer() {
     productos.length > 0 &&
     Array.from(new Set(productos.map((producto) => producto.categoria)));
 
-  console.log(categorias);
-
   return (
     <section className="container">
       <h4 className="text-center mt-5">Categorias</h4>

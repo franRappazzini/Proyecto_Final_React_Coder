@@ -18,8 +18,6 @@ function FormCompra() {
   const { carrito, setCarrito, precioTotal } = useCartContext();
   const history = useHistory();
 
-  console.log(nombre, apellido, email, email2);
-
   // escucha el envio del form
   function handleSubmit(e) {
     e.preventDefault();
@@ -69,7 +67,7 @@ function FormCompra() {
         );
         createPDF(orden, res.id);
       })
-      .catch((err) => console.log(`Error: ${err}`))
+      .catch((err) => Swal.fire(`Error:`, `${err}.`, "error"))
       .finally(() => {
         history.push("/");
         setCarrito([]);

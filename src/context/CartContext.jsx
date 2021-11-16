@@ -31,8 +31,6 @@ function CartContext({ children }) {
     } else {
       setCarrito([...carrito, producto]);
     }
-
-    console.log(carrito);
   }
 
   // suma la cantidad total de productos en el carrito
