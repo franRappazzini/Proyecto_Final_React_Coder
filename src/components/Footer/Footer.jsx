@@ -13,7 +13,7 @@ function Footer() {
         >
           Francisco Rappazzini
         </a>{" "}
-        (ReactJS App)
+        (React JS App)
       </p>
     </section>
   );

@@ -8,10 +8,10 @@ function Home() {
     <main>
       <CarouselBt />
 
-      <CategoriasContainer />
-
       <h4 className="text-center mt-5">Productos</h4>
       <ItemListContainer />
+
+      <CategoriasContainer />
     </main>
   );
 }
