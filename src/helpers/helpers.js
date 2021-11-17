@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import Swal from "sweetalert2";
+import { getFirebase } from "../services/getFirebase";
 
 // loader mientras se se envia la peticion de compra
 export function checkoutLoader() {
@@ -67,4 +68,39 @@ export function createPDF(orden, id) {
   );
 
   pdf.save(`factura-${id}.pdf`);
+}
+
+// valida que los mail sean validos
+export function emailValidator(email, email2, sendToFirebase, checkoutLoader) {
+  if (email === email2) {
+    sendToFirebase();
+    checkoutLoader();
+  } else {
+    Swal.fire(
+      "Error",
+      "Los email ingresados no coinciden. Ponga el mismo email para poder realizar la compra.",
+      "error"
+    );
+  }
+}
+
+// envia los datos a firebase
+export function putToFirebase(orden, nombre, apellido, history, setCarrito) {
+  const db = getFirebase();
+
+  db.collection("compras")
+    .add(orden)
+    .then((res) => {
+      Swal.fire(
+        `Felicidades ${nombre} ${apellido}!`,
+        `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. A continuación se le descargara la factura de la compra.`,
+        "success"
+      );
+      createPDF(orden, res.id);
+    })
+    .catch((err) => Swal.fire(`Error:`, `${err}.`, "error"))
+    .finally(() => {
+      history.push("/");
+      setCarrito([]);
+    });
 }

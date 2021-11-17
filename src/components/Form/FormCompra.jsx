@@ -6,7 +6,12 @@ import firebase from "firebase";
 import { useCartContext } from "../../context/CartContext";
 import { getFirebase } from "../../services/getFirebase";
 import { useHistory } from "react-router";
-import { checkoutLoader, createPDF } from "../../helpers/helpers";
+import {
+  checkoutLoader,
+  createPDF,
+  emailValidator,
+  putToFirebase,
+} from "../../helpers/helpers";
 import InputForm from "../StateLess/InputForm";
 import { Link } from "react-router-dom";
 
@@ -23,27 +28,13 @@ function FormCompra() {
     e.preventDefault();
 
     if (carrito.length > 0) {
-      emailCheck();
+      emailValidator(email, email2, sendToFirebase, checkoutLoader);
     } else {
       Swal.fire(
         "Error",
         "No hay productos en el carrito. Sera redirigido al home.",
         "error"
       ).finally(() => history.push("/"));
-    }
-  }
-
-  // validar que los emails sean iguales
-  function emailCheck() {
-    if (email === email2) {
-      sendToFirebase();
-      checkoutLoader();
-    } else {
-      Swal.fire(
-        "Error",
-        "Los email ingresados no coinciden. Ponga el mismo email para poder realizar la compra.",
-        "error"
-      );
     }
   }
 
@@ -55,23 +46,7 @@ function FormCompra() {
     orden.total = precioTotal();
     orden.fecha = firebase.firestore.Timestamp.fromDate(new Date());
 
-    const db = getFirebase();
-
-    db.collection("compras")
-      .add(orden)
-      .then((res) => {
-        Swal.fire(
-          `Felicidades ${nombre} ${apellido}!`,
-          `Su compra se realizo exitosamente, pronto recibira un mail para seguir el envio. A continuación se le descargara la factura de la compra.`,
-          "success"
-        );
-        createPDF(orden, res.id);
-      })
-      .catch((err) => Swal.fire(`Error:`, `${err}.`, "error"))
-      .finally(() => {
-        history.push("/");
-        setCarrito([]);
-      });
+    putToFirebase(orden, nombre, apellido, history, setCarrito);
   }
 
   // vacia los datos del form
