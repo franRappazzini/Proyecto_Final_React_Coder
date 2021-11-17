@@ -4,11 +4,9 @@ import { Breadcrumb, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import firebase from "firebase";
 import { useCartContext } from "../../context/CartContext";
-import { getFirebase } from "../../services/getFirebase";
 import { useHistory } from "react-router";
 import {
   checkoutLoader,
-  createPDF,
   emailValidator,
   putToFirebase,
 } from "../../helpers/helpers";
