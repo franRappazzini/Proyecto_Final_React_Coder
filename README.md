@@ -10,6 +10,7 @@ E-commerce construido con React JS para el Proyecto Final de Coderhouse.
 * [Firebase](https://firebase.google.com/)
 * [React Router DOM](https://v5.reactrouter.com/web/guides/quick-start)
 * [Sweet Alert 2](https://sweetalert2.github.io/)
+* [jsPDF](https://www.npmjs.com/package/jspdf)
 
 👉🏼[Toque para ver proyecto](https://proyecto-final-react-coder.vercel.app/)👈🏼
 
