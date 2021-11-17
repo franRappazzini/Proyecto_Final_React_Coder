@@ -9,7 +9,7 @@ import {
   checkoutLoader,
   emailValidator,
   putToFirebase,
-} from "../../helpers/helpers";
+} from "../../helpers/formHelpers";
 import InputForm from "../StateLess/InputForm";
 import { Link } from "react-router-dom";
 
