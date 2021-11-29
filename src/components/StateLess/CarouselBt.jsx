@@ -8,7 +8,7 @@ function CarouselBt() {
       <Carousel.Item>
         <img
           className="d-block w-100 carousel__img"
-          src="https://res.cloudinary.com/rappanui/image/upload/v1636977193/Proyecto%20Final%20ReactJS%20Coder/meli1_z11zjs.webp"
+          src="https://res.cloudinary.com/rappanui/image/upload/v1638209801/Proyecto%20Final%20ReactJS%20Coder/mali_sin_meli_ciue7l.jpg"
           alt="First slide"
         />
       </Carousel.Item>
