@@ -15,7 +15,7 @@ function Header() {
     <header>
       <section className="container d-flex justify-content-between align-items-center pt-3">
         <Link to="/">
-          <h1 className="m-0">MELI</h1>
+          <h1 className="m-0">Home</h1>
         </Link>
 
         <Form.Control
